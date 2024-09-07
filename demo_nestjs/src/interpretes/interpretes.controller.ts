@@ -10,7 +10,9 @@ import {
 import { InterpretesService } from './interpretes.service';
 import { CreateInterpreteDto } from './dto/create-interprete.dto';
 import { UpdateInterpreteDto } from './dto/update-interprete.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('interpretes')
 @Controller('interpretes')
 export class InterpretesController {
   constructor(private readonly interpretesService: InterpretesService) {}

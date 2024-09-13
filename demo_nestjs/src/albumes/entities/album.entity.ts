@@ -1,24 +1,25 @@
-import { Album } from 'src/albumes/entities/album.entity';
+import { Interprete } from 'src/interpretes/entities/interprete.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('interpretes')
-export class Interprete {
+@Entity('albumes')
+export class Album {
   @PrimaryGeneratedColumn('identity')
   id: number;
 
-  @Column('varchar', { length: 50 })
+  @Column('varchar', { length: 70 })
   nombre: string;
 
-  @Column('varchar', { length: 30 })
-  nacionalidad: string;
+  @Column('date', { name: 'fecha_lanzamiento' })
+  fechaLanzamiento: Date;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date;
@@ -29,6 +30,7 @@ export class Interprete {
   @DeleteDateColumn({ name: 'fecha_eliminacion', select: false })
   fechaEliminacion: Date;
 
-  @OneToMany(() => Album, (album) => album.interprete)
-  albumes: Album[];
+  @ManyToOne(() => Interprete, (interprete) => interprete.albumes)
+  @JoinColumn({ name: 'id_interprete', referencedColumnName: 'id' })
+  interprete: Interprete;
 }

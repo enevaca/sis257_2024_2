@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { InterpretesModule } from './interpretes/interpretes.module';
+import { GenerosModule } from './generos/generos.module';
+import { AlbumesModule } from './albumes/albumes.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { InterpretesModule } from './interpretes/interpretes.module';
       autoLoadEntities: true,
     }),
     InterpretesModule,
+    GenerosModule,
+    AlbumesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

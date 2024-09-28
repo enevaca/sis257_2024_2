@@ -1,0 +1,25 @@
+h1 {
+  color: red;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+  font-family: verdana;
+  background-color: hsl(9, 100%, 64%);
+  margin: 20px 100px 10px 50px;
+  padding: 20px 60px;
+}
+h3 {
+  border: 2px dashed violet;
+}
+
+#parrafo01 {
+  color: blue;
+  font-size: 25px;
+  font-family: Arial;
+}
+
+.error {
+  background-color: red;
+  font-style: italic;
+}

@@ -35,6 +35,14 @@ export class AlbumesService {
     return this.albumesRepository.find({ relations: ['interprete'] });
   }
 
+  async findByInterprete(idInterprete: number): Promise<Album[]> {
+    return this.albumesRepository
+      .createQueryBuilder('albumes')
+      .innerJoin('albumes.interprete', 'interprete')
+      .where('interprete.id = :idInterprete', { idInterprete })
+      .getMany();
+  }
+
   async findOne(id: number): Promise<Album> {
     const album = this.albumesRepository.findOne({
       where: { id },

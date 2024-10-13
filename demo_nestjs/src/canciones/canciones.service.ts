@@ -35,7 +35,9 @@ export class CancionesService {
   }
 
   async findAll(): Promise<Cancion[]> {
-    return this.cancionesRepository.find({ relations: ['album', 'genero'] });
+    return this.cancionesRepository.find({
+      relations: ['album', 'genero', 'album.interprete'],
+    });
   }
 
   async findOne(id: number): Promise<Cancion> {

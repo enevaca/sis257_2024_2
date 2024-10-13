@@ -60,7 +60,7 @@ async function handleSave() {
       style="width: 25rem"
     >
       <div class="flex items-center gap-4 mb-4">
-        <label for="nombre" class="font-semibold w-24">Nombre</label>
+        <label for="nombre" class="font-semibold w-4">Nombre</label>
         <InputText
           id="nombre"
           v-model="interprete.nombre"
@@ -70,7 +70,7 @@ async function handleSave() {
         />
       </div>
       <div class="flex items-center gap-4 mb-4">
-        <label for="nacionalidad" class="font-semibold w-24">Nacionalidad</label>
+        <label for="nacionalidad" class="font-semibold w-4">Nacionalidad</label>
         <InputText
           id="nacionalidad"
           v-model="interprete.nacionalidad"

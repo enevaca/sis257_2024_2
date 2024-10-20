@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { GenerosService } from './generos.service';
 import { CreateGeneroDto } from './dto/create-genero.dto';
 import { UpdateGeneroDto } from './dto/update-genero.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('generos')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('generos')
 export class GenerosController {
   constructor(private readonly generosService: GenerosService) {}

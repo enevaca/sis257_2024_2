@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useAuthStore } from './stores'
+const authStore = useAuthStore()
 </script>
 
 <template>
@@ -8,14 +10,17 @@ import HelloWorld from './components/HelloWorld.vue'
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld :msg="'SIS257' + (authStore.user ? ' - Hola ' + authStore.user : '')" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/prueba">Prueba</RouterLink>
-        <RouterLink to="/interpretes">Intépretes</RouterLink>
-        <RouterLink to="/canciones">Canciones</RouterLink>
+        <RouterLink to="/">Inicio</RouterLink>
+        <RouterLink v-if="!authStore.token" to="/login">Iniciar Sesión</RouterLink>
+        <span v-else>
+          <RouterLink to="/interpretes">Intérpretes</RouterLink>
+          <RouterLink to="/canciones">Canciones</RouterLink>
+          <RouterLink to="/about">Acerca De</RouterLink>
+          <a @click="authStore.logout()" class="text-danger">Salir</a>
+        </span>
       </nav>
     </div>
   </header>

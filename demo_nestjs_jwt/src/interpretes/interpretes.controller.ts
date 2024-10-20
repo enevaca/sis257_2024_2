@@ -6,13 +6,17 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { InterpretesService } from './interpretes.service';
 import { CreateInterpreteDto } from './dto/create-interprete.dto';
 import { UpdateInterpreteDto } from './dto/update-interprete.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @ApiTags('interpretes')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard)
 @Controller('interpretes')
 export class InterpretesController {
   constructor(private readonly interpretesService: InterpretesService) {}

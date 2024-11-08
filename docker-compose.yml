@@ -1,0 +1,55 @@
+networks:
+  net-sis257:
+    name: net-sis257
+    driver: bridge
+
+services:
+  db-sis257:
+    image: postgres
+    container_name: db-sis257
+    restart: always
+    ports:
+      - "5434:5432"
+    networks:
+      - net-sis257
+    environment:
+      POSTGRES_DB: db_sis257
+      POSTGRES_USER: usrsis257
+      POSTGRES_PASSWORD: 123456
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  backend-sis257:
+    depends_on:
+      - db-sis257
+    image: be-sis257
+    container_name: api-sis257
+    restart: unless-stopped
+    build:
+      context: ./demo_nestjs_jwt
+    ports:
+      - 3000:3000
+    networks:
+      - net-sis257
+    environment:
+      DB_HOST: db-sis257
+    volumes:
+      - ./demo_nestjs_jwt:/usr/src/app
+      - /usr/src/app/node_modules/
+
+  frontend-sis257:
+    depends_on:
+        - backend-sis257
+    image: fe-sis257
+    container_name: app-sis257
+    restart: unless-stopped
+    build:
+      context: ./demo_vue
+    ports:
+      - 85:85
+    networks:
+      - net-sis257
+    environment:
+      VITE_BASE_URL_ENDPOINT: backend-sis257
+    volumes:
+      - /usr/src/app/node_modules/
